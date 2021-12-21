@@ -1,21 +1,63 @@
 <template>
-  <nav>Navigation</nav>
+  <nav>
+    <img src="../assets/logo.png" />
+    <ul id="example-1">
+      <li v-for="item in data.results" :key="item.index">
+        <span>
+          {{ item.title }}
+        </span>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
+
 export default {
   name: "Navigation",
-  props: {},
+data() {
+    return {
+      data: {}
+    }
+  },
+  beforeMount(){
+    this.getFilmsList();
+  },
+  methods: {
+    async getFilmsList(){
+      const res = await fetch('https://swapi.dev/api/films/');
+      const data = await res.json();
+      this.data = data;
+    }
+  }
 };
 </script>
 
 <style scoped>
 nav {
+  
   width: 30%;
-  height: 100%;
-  padding: 20px;
   box-sizing: border-box;
   background-color: #2c313b;
   color: #fff;
+    font-family: "Star Jedi";
+}
+
+img {
+  width: 40%;
+  height: auto;
+  margin: 20px auto;
+  display: block;
+}
+
+li {
+  list-style: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: #f8f8f8;
+  color: #000;
 }
 </style>

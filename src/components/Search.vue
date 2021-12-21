@@ -1,22 +1,57 @@
 <template>
   <div class="search">
-    <input class="search-input" value="" placeholder="Search..." />
-    <button class="search-button" v-on:click="search">
+    <input
+      class="search-input"
+      v-on:input="searchValue"
+      placeholder="Search..."
+    />
+    <button class="search-button" v-on:click="getItemsList">
       <font-awesome-icon icon="search" />
     </button>
   </div>
 </template>
 
 <script>
+
 export default {
   name: "Search",
   props: {},
-  methods: {
-    search: function (event) {
-      console.log("hello", event);
-    },
+  data() {
+    return {
+      data: {searchText:''}
+    }
   },
-};
+    beforeMount() {this.getItemsList()
+    },
+  methods: {
+    getItemsList: async function (){
+      let res = await fetch('https://swapi.dev/api/films/?search='+this.data.searchText);
+      let dataObj = await res.json();
+      let data = {films: dataObj.results};
+
+      res = await fetch('https://swapi.dev/api/people/?search='+this.data.searchText);
+      dataObj = await res.json();
+      data = {...data, people: dataObj.results};
+            res = await fetch('https://swapi.dev/api/planets/?search='+this.data.searchText);
+      dataObj = await res.json();
+      data = {...data, planets: dataObj.results};
+            res = await fetch('https://swapi.dev/api/starships/?search='+this.data.searchText);
+      dataObj = await res.json();
+      data = {...data, starships: dataObj.results};
+      this.data = {...this.data, data};
+      this.$emit('dataGeneration', this.data);
+    },
+    searchValue: function( event ){
+      if(event.data){
+      this.data = {...this.data, searchText: this.data.searchText + event.data} ;
+      } else {
+        this.data = {...this.data, searchText: this.data.searchText.slice(0, -1)} ;
+      }
+    }
+  }
+  };
+
+
 </script>
 
 <style scoped>
@@ -26,6 +61,7 @@ export default {
 }
 
 .search-input {
+  font-family: "Montserrat";
   outline: none;
   border: none;
   background-color: #2c313b;

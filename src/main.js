@@ -6,12 +6,13 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faSearch);
-
 Vue.component("font-awesome-icon", FontAwesomeIcon);
-
 Vue.config.productionTip = false;
+
+let data = { searchText: ''};
 
 new Vue({
   el: "#app",
   render: (h) => h(App),
+  data: data,
 });

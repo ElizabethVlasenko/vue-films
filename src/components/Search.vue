@@ -12,46 +12,109 @@
 </template>
 
 <script>
-
 export default {
   name: "Search",
   props: {},
   data() {
     return {
-      data: {searchText:''}
-    }
+      data: { searchText: "" },
+    };
   },
-    beforeMount() {this.getItemsList()
-    },
+  beforeMount() {
+    this.getItemsList();
+  },
   methods: {
-    getItemsList: async function (){
-      let res = await fetch('https://swapi.dev/api/films/?search='+this.data.searchText);
+    getItemsList: async function () {
+      let dataResults = [];
+
+      //--------------------Films--------------------
+
+      let res = await fetch(
+        "https://swapi.dev/api/films/?search=" + this.data.searchText
+      );
       let dataObj = await res.json();
-      let data = {films: dataObj.results};
+      let data = { films: dataObj.results };
 
-      res = await fetch('https://swapi.dev/api/people/?search='+this.data.searchText);
+      //--------------------People--------------------
+
+      res = await fetch(
+        "https://swapi.dev/api/people/?search=" + this.data.searchText
+      );
       dataObj = await res.json();
-      data = {...data, people: dataObj.results};
-            res = await fetch('https://swapi.dev/api/planets/?search='+this.data.searchText);
-      dataObj = await res.json();
-      data = {...data, planets: dataObj.results};
-            res = await fetch('https://swapi.dev/api/starships/?search='+this.data.searchText);
-      dataObj = await res.json();
-      data = {...data, starships: dataObj.results};
-      this.data = {...this.data, data};
-      this.$emit('dataGeneration', this.data);
-    },
-    searchValue: function( event ){
-      if(event.data){
-      this.data = {...this.data, searchText: this.data.searchText + event.data} ;
-      } else {
-        this.data = {...this.data, searchText: this.data.searchText.slice(0, -1)} ;
+      data = { ...data, people: [...dataObj.results] };
+
+      while (dataObj.next != undefined) {
+        res = await fetch(dataObj.next);
+        dataObj = await res.json();
+        for (let i = 0; i < dataObj.results.length; i++) {
+          dataResults.push(dataObj.results[i]);
+        }
+
+        data = { ...data, people: dataResults };
       }
-    }
-  }
-  };
 
+      dataResults = [];
 
+      //--------------------Planets--------------------
+
+      res = await fetch(
+        "https://swapi.dev/api/planets/?search=" + this.data.searchText
+      );
+      dataObj = await res.json();
+      data = { ...data, planets: [...dataObj.results] };
+      console.log("planets", dataObj.next);
+      while (dataObj.next != undefined) {
+        res = await fetch(dataObj.next);
+        dataObj = await res.json();
+          console.log("dataObj", dataObj.results);
+        for (let i = 0; i < dataObj.results.length; i++) {
+          dataResults.push(dataObj.results[i]);
+
+        }
+          console.log("dataObj.results[i]", dataResults);
+        data = { ...data, planets: dataResults };
+      }
+
+      dataResults = [];
+
+      //--------------------Starships--------------------
+
+      res = await fetch(
+        "https://swapi.dev/api/starships/?search=" + this.data.searchText
+      );
+      dataObj = await res.json();
+      data = { ...data, starships: [...dataObj.results] };
+
+      while (dataObj.next != undefined) {
+        res = await fetch(dataObj.next);
+        dataObj = await res.json();
+        for (let i = 0; i < dataObj.results.length; i++) {
+          dataResults.push(dataObj.results[i]);
+        }
+
+        data = { ...data, starships: dataResults };
+      }
+      console.log("last data", data);
+      dataResults = [];
+
+      this.data = { ...this.data, data };
+      this.$emit("dataGeneration", this.data);
+    },
+    searchValue: function (event) {
+      if (event.data) {
+        this.data = {
+          ...this.data,
+          searchText: this.data.searchText + event.data,
+        };
+      } else {
+        this.data = {
+          ...this.data,
+          searchText: this.data.searchText.slice(0, -1),
+        };
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>

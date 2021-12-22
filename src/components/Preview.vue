@@ -8,12 +8,12 @@
 <script>
 export default {
   name: "Preview",
-  props: {
-    title: String,
-    model: String,
-    data: Object,
-    onClickData: Function,
-  },
+  props: [
+    "title",
+    "model",
+    "data",
+    "onClickData",
+  ],
   methods: {
     openData() {
       this.onClickData(this.data);

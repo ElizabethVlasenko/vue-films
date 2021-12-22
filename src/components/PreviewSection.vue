@@ -26,6 +26,9 @@ export default {
   components: {
     Preview,
   },
+  mounted() {
+    this.$emit('isLoading', false)
+  }
 };
 </script>
 

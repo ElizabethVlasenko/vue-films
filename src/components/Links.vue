@@ -11,7 +11,7 @@
         :onClickData="onClickData"
       />
     </div>
-    <div :class=" this.showAll?'links-button hidden ':'links-button'" v-on:click="showMore">See more...</div>
+    <div :class=" this.showAll?'links-button hide ':'links-button'" v-on:click="showMore">See more...</div>
   </div>
 </template>
 
@@ -108,7 +108,7 @@ export default {
   max-height: none;
 }
 
-.hidden {
+.hide {
   opacity: 0;
   height: 0;
 }

@@ -62,16 +62,12 @@ export default {
       );
       dataObj = await res.json();
       data = { ...data, planets: [...dataObj.results] };
-      console.log("planets", dataObj.next);
       while (dataObj.next != undefined) {
         res = await fetch(dataObj.next);
         dataObj = await res.json();
-          console.log("dataObj", dataObj.results);
         for (let i = 0; i < dataObj.results.length; i++) {
           dataResults.push(dataObj.results[i]);
-
         }
-          console.log("dataObj.results[i]", dataResults);
         data = { ...data, planets: dataResults };
       }
 
@@ -94,7 +90,6 @@ export default {
 
         data = { ...data, starships: dataResults };
       }
-      console.log("last data", data);
       dataResults = [];
 
       this.data = { ...this.data, data };

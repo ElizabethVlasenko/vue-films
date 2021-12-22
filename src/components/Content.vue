@@ -1,15 +1,18 @@
 <template>
   <div class="content">
     <Search @dataGeneration="onClickChild" />
-    <FilmInfo
+    <ItemInfo
       id="info"
-      v-if="Object.keys(this.data.activePost).length > 0"
+      v-bind:class="!(Object.keys(this.data.activePost).length > 0)?'hide':''"
       :data="this.data.activePost"
+      :searchResult="this.data.search"
     />
+          <!-- v-if="Object.keys(this.data.activePost).length > 0" -->
     <Links
       v-if="Object.keys(this.data.activePostLinks).length > 0"
       :data="this.data.activePostLinks"
       :onClickData="onClickData"
+      :key='this.linksKey'
     />
     <SearchResult :data="data.search" :onClickData="onClickData" />
   </div>
@@ -18,7 +21,7 @@
 <script>
 import Search from "./Search.vue";
 import Links from "./Links.vue";
-import FilmInfo from "./FilmInfo.vue";
+import ItemInfo from "./ItemInfo.vue";
 import SearchResult from "./SearchResult.vue";
 
 export default {
@@ -26,7 +29,7 @@ export default {
   components: {
     Search,
     Links,
-    FilmInfo,
+    ItemInfo,
     SearchResult,
   },
   data() {
@@ -35,18 +38,18 @@ export default {
         search: { films: [], people: [], planets: [], starships: [] },
         activePost: {},
         activePostLinks: {},
+        linksKey: 1568,
       },
     };
   },
   methods: {
     onClickChild(value) {
       this.data = { ...this.data, search: { ...value.data } };
-      console.log("value", value);
     },
 
     onClickData(data) {
       let links = {};
-
+console.log("data", data);
       for (let key in data) {
         if (Array.isArray(data[key])) {
           links = { ...links, [key]: data[key] };
@@ -71,6 +74,7 @@ export default {
         left: 0,
         behavior: "smooth",
       });
+      this.linksKey = Math.random()
     },
   },
 };
@@ -84,5 +88,12 @@ export default {
   display: flex;
   flex-direction: column;
   background-color: #353d45;
+}
+
+.hide {
+  opacity: 0;
+  height:  0;
+  margin: 0;
+  padding: 0;
 }
 </style>

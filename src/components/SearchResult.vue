@@ -3,25 +3,25 @@
     <PreviewSection 
       v-if="data.films.length > 0 " 
       :data="data.films" 
-      title="Films" 
+      title="films" 
       :onClickData="onClickData"
       />
     <PreviewSection
       v-if="data.people.length > 0"
       :data="data.people"
-      title="People"
+      title="people"
       :onClickData="onClickData"
     />
     <PreviewSection
       v-if="data.planets.length > 0"
       :data="data.planets"
-      title="Planets"
+      title="planets"
       :onClickData="onClickData"
     />
     <PreviewSection
       v-if="data.starships.length > 0"
       :data="data.starships"
-      title="Starships"
+      title="starships"
       :onClickData="onClickData"
     />
   </div>
@@ -39,7 +39,7 @@ export default {
     PreviewSection,
   },
   beforeMount () {
-    console.log(this.data);
+    // console.log(this.data);
   }
 };
 </script>

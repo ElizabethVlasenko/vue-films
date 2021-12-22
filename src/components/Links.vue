@@ -1,8 +1,9 @@
 <template>
   <div class="links">
-    <div v-for="arr in linkToData" :key="arr.index">
+    <h2 class="links-title">Connected Links</h2>
+    <div class="links-container">
       <Preview
-        v-for="item in arr"
+        v-for="item in linkToData"
         :key="item.index"
         :title="item.title ? item.title : item.name"
         :model="item.model ? item.model : ''"
@@ -28,30 +29,30 @@ export default {
     };
   },
   methods: {
-    getInfo: async function (link) {
-      const res = await fetch(link);
-      let data = await res.json();
+    // getInfo: async function (link) {
+    //   const res = await fetch(link);
+    //   let data = await res.json();
 
-      for (let key in data) {
-        if (Array.isArray(data[key])) {
-          delete data[key];
-        }
-      }
-      return data;
-    },
-    makeLinks: function () {
+    //   for (let key in data) {
+    //     if (!Array.isArray(data[key])) {
+    //       delete data[key];
+    //     }
+    //   }
+    //   return data;
+    // },
+    makeLinks: async function () {
       for (let key in this.data) { //data {planets: {}}
-      let length = this.data[key].length;
+        let length = this.data[key].length;
         for (let i = 0; i < length; i++) {
-          console.log(this.getInfo(key[i]));
-          this.linkToData.push(this.getInfo(key[i]));
+          const res = await fetch(this.data[key][i]);
+          let data = await res.json();
+          this.linkToData.push(data);
         }
       }
-      console.log("makeLinksData", this.data);
     },
   },
   beforeMount() {
-    // this.makeLinks();
+    this.makeLinks();
   },
 };
 </script>
@@ -64,5 +65,21 @@ export default {
   border-radius: 5px;
   padding: 10px;
   background-color: #f8f8f8;
+}
+
+.links-title {
+  font-family: "Star Jedi";
+  text-align: center;
+  margin: 10px auto;
+  width: 50%;
+  border-bottom: 2px solid #353d45;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }
 </style>

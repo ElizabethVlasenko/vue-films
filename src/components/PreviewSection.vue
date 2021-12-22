@@ -1,6 +1,6 @@
 <template>
   <div class="preview-section">
-    <h2 class="preview-section-title">{{title}}</h2>
+    <h2 class="preview-section-title" v-bind:id="title">{{title}}</h2>
     <div class="preview-section-content" >
       <Preview
         v-for="item in data"

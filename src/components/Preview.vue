@@ -13,6 +13,7 @@ export default {
     "model",
     "data",
     "onClickData",
+
   ],
   methods: {
     openData() {
@@ -29,8 +30,9 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
   /* border: 2px solid #000; */
-  width: 20%;
+  width: 21%;
   margin: 10px 0;
   padding: 5px;
   min-height: 80px;

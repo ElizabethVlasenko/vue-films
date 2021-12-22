@@ -3,16 +3,18 @@
     <Search @dataGeneration="onClickChild" />
     <ItemInfo
       id="info"
-      v-bind:class="!(Object.keys(this.data.activePost).length > 0)?'hide':''"
+      v-bind:class="
+        !(Object.keys(this.data.activePost).length > 0) ? 'hide' : ''
+      "
       :data="this.data.activePost"
       :searchResult="this.data.search"
     />
-          <!-- v-if="Object.keys(this.data.activePost).length > 0" -->
+    <!-- v-if="Object.keys(this.data.activePost).length > 0" -->
     <Links
       v-if="Object.keys(this.data.activePostLinks).length > 0"
       :data="this.data.activePostLinks"
       :onClickData="onClickData"
-      :key='this.linksKey'
+      :key="this.linksKey"
     />
     <SearchResult :data="data.search" :onClickData="onClickData" />
   </div>
@@ -32,6 +34,7 @@ export default {
     ItemInfo,
     SearchResult,
   },
+  props: ["navData"],
   data() {
     return {
       data: {
@@ -42,6 +45,11 @@ export default {
       },
     };
   },
+  watch: {
+    navData: function (data) {
+      this.onClickData(data);
+    },
+  },
   methods: {
     onClickChild(value) {
       this.data = { ...this.data, search: { ...value.data } };
@@ -49,7 +57,6 @@ export default {
 
     onClickData(data) {
       let links = {};
-console.log("data", data);
       for (let key in data) {
         if (Array.isArray(data[key])) {
           links = { ...links, [key]: data[key] };
@@ -70,11 +77,11 @@ console.log("data", data);
       // window.scrollTo(0,0);
       // document.getElementById('app').scrollIntoView();
       window.scroll({
-        top: document.getElementById("info").offsetTop,
+        top: document.getElementById("app").offsetTop,
         left: 0,
         behavior: "smooth",
       });
-      this.linksKey = Math.random()
+      this.linksKey = Math.random();
     },
   },
 };
@@ -92,7 +99,7 @@ console.log("data", data);
 
 .hide {
   opacity: 0;
-  height:  0;
+  height: 0;
   margin: 0;
   padding: 0;
 }

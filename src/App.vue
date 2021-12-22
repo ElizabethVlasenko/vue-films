@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Navigation />
-    <Content />
+    <Navigation @linkClick="onClickChild" />
+    <Content :navData="this.data" />
   </div>
 </template>
 
@@ -14,6 +14,17 @@ export default {
   components: {
     Navigation,
     Content,
+  },
+  data() {
+    return {
+      data: {},
+    };
+  },
+  props: ["linkClick"],
+  methods: {
+    onClickChild(data) {
+      this.data = data;
+    },
   },
 };
 </script>

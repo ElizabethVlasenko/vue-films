@@ -1,7 +1,7 @@
 <template>
   <div class="search-result">
     <PreviewSection 
-      v-if="data.films.length > 0" 
+      v-if="data.films.length > 0 " 
       :data="data.films" 
       title="Films" 
       :onClickData="onClickData"
@@ -38,6 +38,9 @@ export default {
   components: {
     PreviewSection,
   },
+  beforeMount () {
+    console.log(this.data);
+  }
 };
 </script>
 

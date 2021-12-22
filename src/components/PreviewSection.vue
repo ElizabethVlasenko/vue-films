@@ -1,7 +1,7 @@
 <template>
   <div class="preview-section">
     <h2 class="preview-section-title">{{title}}</h2>
-    <div class="preview-section-content">
+    <div class="preview-section-content" >
       <Preview
         v-for="item in data"
         :key="item.index"

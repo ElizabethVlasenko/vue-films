@@ -1,12 +1,12 @@
 <template>
   <div class="preview-section">
-    <h2 class="preview-section-title" v-bind:id="title">{{title}}</h2>
-    <div class="preview-section-content" >
+    <h2 class="preview-section-title" v-bind:id="title">{{ title }}</h2>
+    <div class="preview-section-content">
       <Preview
         v-for="item in data"
         :key="item.index"
         :title="item.title ? item.title : item.name"
-        :model="item.model ? item.model : '' "
+        :model="item.model ? item.model : ''"
         :data="item"
         :onClickData="onClickData"
       />
@@ -21,11 +21,11 @@ export default {
   props: {
     data: Array,
     title: String,
-    onClickData: Function
+    onClickData: Function,
   },
   components: {
     Preview,
-  }
+  },
 };
 </script>
 
@@ -37,17 +37,17 @@ export default {
 }
 
 .preview-section-title {
-      font-family: "Star Jedi";
-    text-align: center;
-    margin: 10px auto;
-    width: 50%;
-    border-bottom: 2px solid #353d45;
+  font-family: "Star Jedi";
+  text-align: center;
+  margin: 10px auto;
+  width: 50%;
+  border-bottom: 2px solid #353d45;
 }
 
 .preview-section-content {
-    display: flex;
+  display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;  
+  justify-content: space-around;
 }
 </style>

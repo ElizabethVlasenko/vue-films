@@ -8,13 +8,7 @@
 <script>
 export default {
   name: "Preview",
-  props: [
-    "title",
-    "model",
-    "data",
-    "onClickData",
-
-  ],
+  props: ["title", "model", "data", "onClickData"],
   methods: {
     openData() {
       this.onClickData(this.data);

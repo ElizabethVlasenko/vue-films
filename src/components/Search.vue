@@ -90,6 +90,7 @@ export default {
 
         data = { ...data, starships: dataResults };
       }
+
       dataResults = [];
 
       this.data = { ...this.data, data };

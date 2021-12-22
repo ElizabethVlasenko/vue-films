@@ -109,7 +109,7 @@ p span {
 }
 .item-info-buttons button:active {
   transform: translateY(1px);
-  background-color: #2C313B;
-  box-shadow: inset 0 0  5px 5px rgba(0, 0, 0, .2);;
+  background-color: #2c313b;
+  box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.2);
 }
 </style>

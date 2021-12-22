@@ -1,11 +1,11 @@
 <template>
   <div class="search-result">
-    <PreviewSection 
-      v-if="data.films.length > 0 " 
-      :data="data.films" 
-      title="films" 
+    <PreviewSection
+      v-if="data.films.length > 0"
+      :data="data.films"
+      title="films"
       :onClickData="onClickData"
-      />
+    />
     <PreviewSection
       v-if="data.people.length > 0"
       :data="data.people"
@@ -38,9 +38,9 @@ export default {
   components: {
     PreviewSection,
   },
-  beforeMount () {
+  beforeMount() {
     // console.log(this.data);
-  }
+  },
 };
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="links">
+  <div :class="showAll?'links open':'links'" >
     <h2 class="links-title">Connected Links</h2>
     <div class="links-container">
       <Preview
@@ -11,6 +11,7 @@
         :onClickData="onClickData"
       />
     </div>
+    <div :class=" this.showAll?'links-button hidden ':'links-button'" v-on:click="showMore">See more...</div>
   </div>
 </template>
 
@@ -26,9 +27,13 @@ export default {
   data() {
     return {
       linkToData: [],
+      showAll:false,
     };
   },
   methods: {
+    showMore () {
+      this.showAll = !this.showAll;
+    },
     // getInfo: async function (link) {
     //   const res = await fetch(link);
     //   let data = await res.json();
@@ -41,7 +46,8 @@ export default {
     //   return data;
     // },
     makeLinks: async function () {
-      for (let key in this.data) { //data {planets: {}}
+      for (let key in this.data) {
+        //data {planets: {}}
         let length = this.data[key].length;
         for (let i = 0; i < length; i++) {
           const res = await fetch(this.data[key][i]);
@@ -60,11 +66,15 @@ export default {
 <style scoped>
 .links {
   width: 100%;
+  position: relative;
   /* flex-grow: 1; */
   box-sizing: border-box;
   border-radius: 5px;
   padding: 10px;
   background-color: #f8f8f8;
+  max-height: 214px;
+  overflow: hidden;
+  
 }
 
 .links-title {
@@ -81,5 +91,25 @@ export default {
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+}
+
+.links-button {
+  position: absolute;
+  top: 175px;
+  width: 97%;
+  background: linear-gradient(transparent, #fff 75%);
+  padding: 10px 0;
+  text-align: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.open {
+  max-height: none;
+}
+
+.hidden {
+  opacity: 0;
+  height: 0;
 }
 </style>

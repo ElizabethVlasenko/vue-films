@@ -88,7 +88,7 @@ export default {
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
 }
 
 .links-button {
@@ -117,7 +117,6 @@ export default {
 
 @media screen and (min-width: 1800px) {
   .links {
-    max-height: 300px;
     min-height: 300px;
     padding: 20px;
   }

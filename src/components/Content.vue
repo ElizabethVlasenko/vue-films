@@ -76,7 +76,7 @@ export default {
       // window.scrollTo(0,0);
       // document.getElementById('app').scrollIntoView();
       window.scroll({
-        top: document.getElementById("app").offsetTop,
+        top: document.getElementById("info").offsetTop,
         left: 0,
         behavior: "smooth",
       });
@@ -101,5 +101,11 @@ export default {
   height: 0;
   margin: 0;
   padding: 0;
+}
+
+@media screen and (max-width: 823px) {
+  .content {
+    width: 100%;
+  }
 }
 </style>

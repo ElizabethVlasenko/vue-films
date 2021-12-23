@@ -115,7 +115,7 @@ export default {
 
 <style scoped>
 .search {
-  width: 50%;
+  width: 65%;
   box-sizing: border-box;
 }
 
@@ -126,7 +126,8 @@ export default {
   background-color: #2c313b;
   box-sizing: border-box;
   border-radius: 5px 0 0 5px;
-  padding: 10px;
+  padding: 15px;
+  font-size: 20px;
   color: #fff;
 }
 
@@ -136,16 +137,32 @@ export default {
   background-color: #fff;
   box-sizing: border-box;
   border-radius: 0 5px 5px 0;
-  padding: 10px;
+  padding: 15px;
 }
 
-@media screen and (max-width: 692px) {
+.search-button svg {
+  width: 20px;
+  height: 20px;
+}
+
+@media screen and (max-width: 823px) {
   .search {
     width: 100%;
   }
-}
 
-.search-input {
-  width: calc(100% - 34px);
+  .search-input {
+    width: calc(100% - 38px);
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  .search-button {
+    padding: 12px;
+  }
+
+  .search-button svg {
+    width: 1em;
+    height: 1em;
+  }
 }
 </style>

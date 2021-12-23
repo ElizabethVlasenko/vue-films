@@ -29,7 +29,7 @@ export default {
   mounted() {
     this.$emit('isLoading', false)
   }
-};
+}
 </script>
 
 <style scoped>

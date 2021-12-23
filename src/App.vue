@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navigation @linkClick="onClickChild" />
-    <Content :navData="this.data" />
+    <Content :navData="this.data" :storedData="this.localStorageData" :updateLocalStorage="updateLocalStorage"/>
   </div>
 </template>
 
@@ -18,6 +18,7 @@ export default {
   data() {
     return {
       data: {},
+      localStorageData:{} //'link':{search data}
     };
   },
   props: ["linkClick"],
@@ -25,7 +26,19 @@ export default {
     onClickChild(data) {
       this.data = data;
     },
+      updateLocalStorage(link, data) {
+      localStorage[link] = data;
+      this.localStorageData=localStorage;
+      console.log("updated!", localStorage);
+    }
   },
+  mounted() {
+        if (localStorage) {
+      // console.log(this.localStorageData);
+      this.storedData = localStorage;
+    }
+
+  }
 };
 </script>
 

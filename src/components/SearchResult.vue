@@ -1,6 +1,6 @@
 <template>
   <div class="search-result">
-    <div  :class="!(this.isLoading)?'search-loader hide':'search-loader'">
+    <div :class="!this.isLoading ? 'search-loader hide' : 'search-loader'">
       <div class="lds-ellipsis">
         <div></div>
         <div></div>
@@ -55,11 +55,11 @@ export default {
       isLoading: true,
     };
   },
-methods: {
-  loadFinished() {
-    this.isLoading = false;
-  }
-}
+  methods: {
+    loadFinished() {
+      this.isLoading = false;
+    },
+  },
 };
 </script>
 

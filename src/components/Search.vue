@@ -14,7 +14,7 @@
 <script>
 export default {
   name: "Search",
-  props: {},
+  props: [ "updateLocalStorage", "storedData" ],
   data() {
     return {
       data: { searchText: "" },
@@ -25,75 +25,96 @@ export default {
   },
   methods: {
     getItemsList: async function () {
-      let dataResults = [];
+      console.log("stored data exist", this.storedData.getItem('https://swapi.dev/api/?search='));
 
-      //--------------------Films--------------------
+      if (
+        this.storedData[
+          "https://swapi.dev/api/?search=" + this.data.searchText
+        ] != undefined
+      ) {
+        let storedResults =
+          this.storedData[
+            "https://swapi.dev/api/?search=" + this.data.searchText
+          ];
+        this.data = { ...this.data, storedResults };
+        console.log("stored data exist in if", this.storedData[
+            "https://swapi.dev/api/?search=" + this.data.searchText
+          ]);
+      } else {
+        let dataResults = [];
 
-      let res = await fetch(
-        "https://swapi.dev/api/films/?search=" + this.data.searchText
-      );
-      let dataObj = await res.json();
-      let data = { films: dataObj.results };
+        //--------------------Films--------------------
 
-      //--------------------People--------------------
+        let res = await fetch(
+          "https://swapi.dev/api/films/?search=" + this.data.searchText
+        );
+        let dataObj = await res.json();
+        let data = { films: dataObj.results };
 
-      res = await fetch(
-        "https://swapi.dev/api/people/?search=" + this.data.searchText
-      );
-      dataObj = await res.json();
-      data = { ...data, people: [...dataObj.results] };
+        //--------------------People--------------------
 
-      while (dataObj.next != undefined) {
-        res = await fetch(dataObj.next);
+        res = await fetch(
+          "https://swapi.dev/api/people/?search=" + this.data.searchText
+        );
         dataObj = await res.json();
-        for (let i = 0; i < dataObj.results.length; i++) {
-          dataResults.push(dataObj.results[i]);
+        data = { ...data, people: [...dataObj.results] };
+
+        while (dataObj.next != undefined) {
+          res = await fetch(dataObj.next);
+          dataObj = await res.json();
+          for (let i = 0; i < dataObj.results.length; i++) {
+            dataResults.push(dataObj.results[i]);
+          }
+
+          data = { ...data, people: dataResults };
         }
 
-        data = { ...data, people: dataResults };
-      }
+        dataResults = [];
 
-      dataResults = [];
+        //--------------------Planets--------------------
 
-      //--------------------Planets--------------------
-
-      res = await fetch(
-        "https://swapi.dev/api/planets/?search=" + this.data.searchText
-      );
-      dataObj = await res.json();
-      data = { ...data, planets: [...dataObj.results] };
-      while (dataObj.next != undefined) {
-        res = await fetch(dataObj.next);
+        res = await fetch(
+          "https://swapi.dev/api/planets/?search=" + this.data.searchText
+        );
         dataObj = await res.json();
-        for (let i = 0; i < dataObj.results.length; i++) {
-          dataResults.push(dataObj.results[i]);
-        }
-        data = { ...data, planets: dataResults };
-      }
-
-      dataResults = [];
-
-      //--------------------Starships--------------------
-
-      res = await fetch(
-        "https://swapi.dev/api/starships/?search=" + this.data.searchText
-      );
-      dataObj = await res.json();
-      data = { ...data, starships: [...dataObj.results] };
-
-      while (dataObj.next != undefined) {
-        res = await fetch(dataObj.next);
-        dataObj = await res.json();
-        for (let i = 0; i < dataObj.results.length; i++) {
-          dataResults.push(dataObj.results[i]);
+        data = { ...data, planets: [...dataObj.results] };
+        while (dataObj.next != undefined) {
+          res = await fetch(dataObj.next);
+          dataObj = await res.json();
+          for (let i = 0; i < dataObj.results.length; i++) {
+            dataResults.push(dataObj.results[i]);
+          }
+          data = { ...data, planets: dataResults };
         }
 
-        data = { ...data, starships: dataResults };
+        dataResults = [];
+
+        //--------------------Starships--------------------
+
+        res = await fetch(
+          "https://swapi.dev/api/starships/?search=" + this.data.searchText
+        );
+        dataObj = await res.json();
+        data = { ...data, starships: [...dataObj.results] };
+
+        while (dataObj.next != undefined) {
+          res = await fetch(dataObj.next);
+          dataObj = await res.json();
+          for (let i = 0; i < dataObj.results.length; i++) {
+            dataResults.push(dataObj.results[i]);
+          }
+
+          data = { ...data, starships: dataResults };
+        }
+
+        dataResults = [];
+        this.data = { ...this.data, data };
+        this.updateLocalStorage(
+          "https://swapi.dev/api/?search=" + this.data.searchText,
+          this.data
+        );
       }
 
-      dataResults = [];
-
-      this.data = { ...this.data, data };
       this.$emit("dataGeneration", this.data);
     },
     searchValue: function (event) {

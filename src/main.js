@@ -9,10 +9,10 @@ library.add(faSearch);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.config.productionTip = false;
 
-let data = { searchText: ''};
+
 
 new Vue({
   el: "#app",
-  render: (h) => h(App),
-  data: data,
+  render: (h) => h(App)
+    
 });

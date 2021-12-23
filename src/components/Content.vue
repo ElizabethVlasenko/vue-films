@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <Search @dataGeneration="onClickChild" />
+    <Search @dataGeneration="onClickChild" :updateLocalStorage="this.updateLocalStorage" :storedData="storedData"/>
     <ItemInfo
       id="info"
       v-bind:class="
@@ -34,7 +34,7 @@ export default {
     ItemInfo,
     SearchResult,
   },
-  props: ["navData"],
+  props: ["navData", "updateLocalStorage", "storedData"],
   data() {
     return {
       data: {
@@ -50,6 +50,7 @@ export default {
       this.onClickData(data);
     },
   },
+
   methods: {
     onClickChild(value) {
       this.data = { ...this.data, search: { ...value.data } };
@@ -82,6 +83,7 @@ export default {
         behavior: "smooth",
       });
       this.linksKey = Math.random();
+
     },
   },
 };

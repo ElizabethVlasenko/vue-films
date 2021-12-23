@@ -53,7 +53,7 @@ export default {
     },
     moveTo: function (tag) {
       window.scroll({
-        top: document.getElementById(tag).offsetTop,
+        top: document.getElementById(tag).getBoundingClientRect().y,
         left: 0,
         behavior: "smooth",
       });

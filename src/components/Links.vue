@@ -1,5 +1,5 @@
 <template>
-  <div :class="showAll?'links open':'links'" >
+  <div :class="showAll ? 'links open' : 'links'" id="links">
     <h2 class="links-title">Connected Links</h2>
     <div class="links-container">
       <Preview
@@ -11,7 +11,12 @@
         :onClickData="onClickData"
       />
     </div>
-    <div :class=" this.showAll?'links-button hide ':'links-button'" v-on:click="showMore">See more...</div>
+    <div
+      :class="this.showAll ? 'links-button hide ' : 'links-button'"
+      v-on:click="showMore"
+    >
+      See more...
+    </div>
   </div>
 </template>
 
@@ -27,12 +32,12 @@ export default {
   data() {
     return {
       linkToData: [],
-      showAll:false,
+      showAll: false,
     };
   },
   methods: {
-    showMore () {
-      this.showAll = !this.showAll;
+    showMore() {
+      this.showAll = true;
     },
     // getInfo: async function (link) {
     //   const res = await fetch(link);
@@ -55,6 +60,10 @@ export default {
           this.linkToData.push(data);
         }
       }
+
+      if (this.linkToData.length <= 4) {
+        this.showAll = true;
+      }
     },
   },
   beforeMount() {
@@ -73,8 +82,8 @@ export default {
   padding: 10px;
   background-color: #f8f8f8;
   max-height: 214px;
+  min-height: 214px;
   overflow: hidden;
-  
 }
 
 .links-title {
@@ -95,7 +104,7 @@ export default {
 
 .links-button {
   position: absolute;
-  top: 175px;
+  bottom: 0;
   width: 97%;
   background: linear-gradient(transparent, #fff 75%);
   padding: 10px 0;
@@ -105,11 +114,15 @@ export default {
 }
 
 .open {
-  max-height: none;
+max-height: 100%;
+    height: auto;
+    min-height: auto;
+    overflow: inherit;
 }
 
 .hide {
   opacity: 0;
   height: 0;
+  display:none;
 }
 </style>

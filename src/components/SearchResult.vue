@@ -68,7 +68,7 @@ methods: {
   position: relative;
   width: 100%;
   height: auto;
-  min-height: 90%;
+  min-height: 85vh;
   margin: 20px 0 0 0;
   box-sizing: border-box;
   border-radius: 5px;
@@ -76,7 +76,6 @@ methods: {
   background-color: #f8f8f8;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 .result-section {
@@ -88,7 +87,6 @@ methods: {
 
 .search-loader {
   position: absolute;
-
   top: 0;
   left: 0;
   height: 100%;

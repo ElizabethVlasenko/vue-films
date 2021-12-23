@@ -79,6 +79,13 @@ html,
   }
 }
 
+@media screen and (max-width: 823px) {
+  #app {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 @media screen and (max-width: 500px) {
   #app {
     font-size: 3vw;

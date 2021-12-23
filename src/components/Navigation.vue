@@ -76,5 +76,9 @@ li:hover {
     width: 25vw;
     max-width: 160px;
   }
+
+  nav {
+    width: 100%;
+  }
 }
 </style>

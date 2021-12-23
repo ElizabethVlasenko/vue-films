@@ -1,7 +1,7 @@
 <template>
   <nav>
     <img src="../assets/logo.png" />
-    <ul id="example-1">
+    <ul>
       <li
         v-for="item in data.results"
         :key="item.index"
@@ -59,10 +59,22 @@ li {
   list-style: none;
   padding: 10px 20px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 li:hover {
   background-color: #f8f8f8;
   color: #000;
+}
+
+@media screen and (max-width: 823px) {
+  li {
+    border-bottom: 1px solid #fff;
+  }
+
+  img {
+    width: 25vw;
+    max-width: 160px;
+  }
 }
 </style>

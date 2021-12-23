@@ -25,7 +25,6 @@ export default {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  /* border: 2px solid #000; */
   width: 21%;
   margin: 10px 0;
   padding: 5px;
@@ -40,5 +39,31 @@ export default {
   transition: 0.5s;
   transform: scale(1.2);
   box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.5);
+}
+
+@media screen and (min-width: 1800px) {
+  .preview {
+    padding: 10px;
+    min-height: 120px;
+  }
+}
+
+@media screen and (max-width: 920px) {
+  .preview {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .preview {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .preview {
+    width: 100%;
+    min-height: 30px;
+  }
 }
 </style>

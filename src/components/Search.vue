@@ -138,4 +138,14 @@ export default {
   border-radius: 0 5px 5px 0;
   padding: 10px;
 }
+
+@media screen and (max-width: 692px) {
+  .search {
+    width: 100%;
+  }
+}
+
+.search-input {
+  width: calc(100% - 34px);
+}
 </style>

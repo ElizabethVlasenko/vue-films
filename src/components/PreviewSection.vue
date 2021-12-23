@@ -27,8 +27,8 @@ export default {
     Preview,
   },
   mounted() {
-    this.$emit('isLoading', false)
-  }
+    this.$emit("isLoading", false);
+  },
 };
 </script>
 

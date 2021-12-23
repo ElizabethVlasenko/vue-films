@@ -35,8 +35,6 @@ export default {
   src: url("//db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.eot");
   src: url("//db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.eot?#iefix")
       format("embedded-opentype"),
-    url("//db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.woff2")
-      format("woff2"),
     url("//db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.woff")
       format("woff"),
     url("//db.onlinewebfonts.com/t/0c724f6aa457310440cf8949c615cbd7.ttf")
@@ -63,6 +61,7 @@ body,
 html,
 #app {
   min-height: 100vh;
+  font-size: 20px;
 }
 
 #app {
@@ -72,5 +71,17 @@ html,
   flex-direction: row;
   align-items: stretch;
   color: #000;
+}
+
+@media screen and (min-width: 1800px) {
+  #app {
+    font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  #app {
+    font-size: 3vw;
+  }
 }
 </style>

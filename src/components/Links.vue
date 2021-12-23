@@ -39,17 +39,6 @@ export default {
     showMore() {
       this.showAll = true;
     },
-    // getInfo: async function (link) {
-    //   const res = await fetch(link);
-    //   let data = await res.json();
-
-    //   for (let key in data) {
-    //     if (!Array.isArray(data[key])) {
-    //       delete data[key];
-    //     }
-    //   }
-    //   return data;
-    // },
     makeLinks: async function () {
       for (let key in this.data) {
         //data {planets: {}}
@@ -114,15 +103,23 @@ export default {
 }
 
 .open {
-max-height: 100%;
-    height: auto;
-    min-height: auto;
-    overflow: inherit;
+  max-height: 100%;
+  height: auto;
+  min-height: auto;
+  overflow: inherit;
 }
 
 .hide {
   opacity: 0;
   height: 0;
-  display:none;
+  display: none;
+}
+
+@media screen and (min-width: 1800px) {
+  .links {
+    max-height: 300px;
+    min-height: 300px;
+    padding: 20px;
+  }
 }
 </style>

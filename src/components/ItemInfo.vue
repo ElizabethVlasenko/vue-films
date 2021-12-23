@@ -69,8 +69,9 @@ export default {
   margin: 20px 0;
   box-sizing: border-box;
   border-radius: 5px;
-  padding: 10px;
+  padding: 10px 20px;
   background-color: #f8f8f8;
+  line-height: 25px;
 }
 
 li {
@@ -91,13 +92,11 @@ p span {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* margin: 20px 0 10px; */
 }
 
 .item-info-buttons button {
-  padding: 15px 0;
+  padding: 15px 10px;
   width: 21%;
-  padding: 10px;
   margin: 10px 0;
   font-family: "Montserrat";
   background-color: #353d45;
@@ -111,5 +110,52 @@ p span {
   transform: translateY(1px);
   background-color: #2c313b;
   box-shadow: inset 0 0 5px 5px rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 1800px) {
+  .item-info {
+    padding: 20px 40px;
+    line-height: 40px;
+  }
+
+  .item-info-buttons button {
+    padding: 15px 0;
+    margin: 25px 0 10px 0;
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 1040px) {
+  .item-info-buttons button {
+    padding: 15px 25px;
+  }
+}
+
+@media screen and (max-width: 823px) {
+  .item-info-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .item-info-buttons button {
+    padding: 15px 10px;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .item-info-buttons button {
+    padding: 10px 5px;
+    width: 100%;
+    margin: 5px 0;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .item-info-buttons button {
+    font-size: 10px;
+  }
 }
 </style>

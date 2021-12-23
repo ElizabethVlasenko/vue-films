@@ -9,7 +9,6 @@
       :data="this.data.activePost"
       :searchResult="this.data.search"
     />
-    <!-- v-if="Object.keys(this.data.activePost).length > 0" -->
     <Links
       v-if="Object.keys(this.data.activePostLinks).length > 0"
       :data="this.data.activePostLinks"

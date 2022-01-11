@@ -97,17 +97,12 @@ export default {
       this.$emit("dataGeneration", this.data);
     },
     searchValue: function (event) {
-      if (event.data) {
+      console.log(event.target.value);
         this.data = {
           ...this.data,
-          searchText: this.data.searchText + event.data,
+          searchText: event.target.value,
         };
-      } else {
-        this.data = {
-          ...this.data,
-          searchText: this.data.searchText.slice(0, -1),
-        };
-      }
+
     },
   },
 };
